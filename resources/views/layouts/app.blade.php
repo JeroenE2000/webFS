@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
 
@@ -25,7 +24,7 @@
     <div class="main-table container-fluid h-100">
         <div class="row pt-3" id="main_table">
             <div class="dragon-cell col">
-                <img class="align-middle h-img hide520px" src="{{url('images/dragon-small.png')}}" alt="Golden Dragon">
+                <img class="align-middle h-img hide520px"  src="{{url('images/dragon-small.png')}}" alt="Golden Dragon">
                 <a href="{{url('/')}}" class="font-chinese">
                     De Gouden Draak
                 </a>

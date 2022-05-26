@@ -173,8 +173,6 @@ table {
     border-bottom:2px solid yellow;
 }
 
-
-
 body {
     background-color: darkred;
     margin: 15px 50px;
@@ -185,8 +183,8 @@ td {
 }
 @font-face {
     font-family: 'chinese_takeawayregular';
-    src: url('/../fonts/chinesetakeaway-webfont.wolff2');
-    src: url('/../fonts/chinesetakeaway-webfont.wolff');
+    src: url('../fonts/chinesetakeaway-webfont.woff'),
+    url('../fonts/chinesetakeaway-webfont.wolff');
     font-weight: normal;
     font-style: normal;
 }
