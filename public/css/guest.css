@@ -1,0 +1,376 @@
+/*sizing*/
+.mw-8em{
+    min-width: 8em !important;
+    max-width: 8em !important;
+}
+
+.mw-12em{
+    min-width: 12em !important;
+    max-width: 12em !important;
+}
+
+.mx-6procent{
+    margin-right: 6%!important;
+    margin-left: 6%!important;
+}
+
+body{
+    font-family: var(--bs-font-sans-serif);
+}
+
+.w-30{
+    width: 30%!important;
+}
+
+.w-20px{
+    width: 40px;
+}
+
+.w-50px{
+    width: 50px;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 0.5em;
+}
+
+.w-25px{
+    width: 25px;
+}
+
+.w-3em{
+    width: 3em;
+}
+
+.mw-2em{
+    max-width: 2em;
+}
+
+.h-25px{
+    height: 25px;
+}
+
+.w-21px{
+    width: 21px;
+}
+
+.h-21px{
+    height: 21px;
+}
+
+.w-85{
+    width: 85%;
+}
+
+.w-2-5{
+    width: 2.5%;
+}
+
+.w-5{
+    width: 5%;
+}
+
+.h-8{
+    height: 8%;
+}
+
+.h-30em{
+    height: 30em;
+}
+
+.h-100{
+    height: 100%;
+}
+
+.vh-100{
+    height: 100vh;
+}
+.p-21px{
+    padding-left: 21px;
+    padding-right: 21px;
+}
+
+.h-15vh{
+    height: 15vh;
+}
+
+.mh-22em{
+    max-height: 22em;
+}
+
+.w-90{
+    width: 90%;
+}
+
+/*Alignment*/
+.vertical-center {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.bottom{
+    bottom: 3%;
+    position: absolute;
+}
+
+.h-15vh{
+    height: 15vh;
+}
+
+.mh-22em{
+    max-height: 22em;
+}
+
+.w-90{
+    width: 90%;
+}
+
+/*Alignment*/
+.vertical-center {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.bottom{
+    bottom: 3%;
+    position: absolute;
+}
+
+.b-y-r{
+    border-right:4px solid yellow;
+}
+
+.b-y-l{
+    border-left:4px solid yellow;
+}
+
+.b-y-t{
+    border-top:4px solid yellow;
+}
+
+.b-y-b{
+    border-bottom:4px solid yellow;
+}
+
+.b-y-r-half{
+    border-right:2px solid yellow;
+}
+
+.b-y-l-half{
+    border-left:2px solid yellow;
+}
+
+.b-y-t-half{
+    border-top:2px solid yellow;
+}
+
+.b-y-b-half{
+    border-bottom:2px solid yellow;
+}
+
+
+
+body {
+    background-color: darkred;
+    margin: 15px 50px;
+}
+
+td {
+    padding: 0px;
+}
+@font-face {
+    font-family: 'chinese_takeawayregular';
+    src: url('/../fonts/chinesetakeaway-webfont.wolff2');
+    src: url('/../fonts/chinesetakeaway-webfont.wolff');
+    font-weight: normal;
+    font-style: normal;
+}
+.font-chinese {
+    font-family: 'chinese_takeawayregular', serif;
+}
+
+.font-chinese:hover{
+    text-decoration: none;
+    color: yellow;
+}
+
+a {
+    text-decoration: none;
+    color: yellow;
+}
+
+.main-table {
+    background-color:red;
+}
+
+.dragon-cell {
+    text-align:center;
+    min-width: 14em;
+    color:yellow;
+    font-size:30px;
+}
+
+.marque {
+    color:yellow;
+    font-weight:bold;
+    text-decoration: none;
+}
+
+.marque:hover{
+    color:yellow;
+}
+
+.img-r{
+    float:right;
+    height:200px;
+}
+.img-l{
+    float:left;
+    height:200px;
+}
+.h-img {
+    height: 50px;
+}
+
+.t-1 {
+    font-size:50px;
+    font-weight:bold;
+    color:yellow;
+}
+
+.t-2 {
+    font-size:40px;
+    font-weight:bold;
+    color:yellow;
+}
+.content-container {
+    background-color: floralwhite;
+    border: 1px solid black;
+}
+.map {
+    width:100%;
+    height:450px;
+}
+
+
+
+/*media query*/
+@media only screen and (max-width: 1030px) {
+    .course{
+        width: 40%;
+    }
+
+    .dragon-cell{
+        min-width: 100%;
+    }
+
+    .hide1030px{
+        display: none;
+    }
+}
+
+
+@media only screen and (max-width: 700px) {
+    .category{
+        width: 80%;
+    }
+
+    .course{
+        width: 80%;
+    }
+
+    .hide700px{
+        display: none;
+    }
+
+    body{
+        margin: 0px;
+    }
+}
+
+@media only screen and (max-width: 520px) {
+
+    .hide520px{
+        display: none;
+    }
+    .t-1 {
+        font-size:35px;
+    }
+
+    .t-2 {
+        font-size:25px;
+    }
+}
+
+@media only screen and (max-width: 1210px) {
+    .h-img {
+        height: 40px;
+    }
+    .img-r{
+        float:right;
+        height:150px;
+    }
+    .img-l{
+        float:left;
+        height:150px;
+    }
+
+    .font-chinese {
+        font-family: 'chinese_takeawayregular', serif;
+        font-size: 20px;
+    }
+
+    .t-1 {
+        font-size:50px;
+        font-weight:bold;
+        color:yellow;
+    }
+
+    .t-2 {
+        font-size:40px;
+        font-weight:bold;
+        color:yellow;
+    }
+
+    .marque {
+        color:yellow;
+        font-weight:bold;
+        text-decoration: none;
+    }
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 50%;
+    }
+}
+
+@media (max-width: 992px) {
+    nav {
+        border: 1px white solid;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .h-img {
+        height: 20px;
+    }
+    .t-1 {
+        font-size:25px;
+        font-weight:bold;
+        color:yellow;
+    }
+
+    .t-2 {
+        font-size:20px;
+        font-weight:bold;
+        color:yellow;
+    }
+    /* For mobile phones: */
+    [class*="col-"] {
+        width: 100%;
+    }
+}
