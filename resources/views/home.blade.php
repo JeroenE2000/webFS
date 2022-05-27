@@ -1,8 +1,5 @@
-@extends('layouts.app')
-
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
+<x-normal-layout>
+    <x-slot name="main">
            <div class="content-container text-center">
                 <br>
                 <h3>
@@ -31,6 +28,5 @@
                 <h1>Met witte rijst. (Nasi of bami voor meerprijs mogelijk.)</h1>
                 <h1>Prijs: €21,00</h1>
             </div>
-        </div>
-</div>
-@endsection
+    </x-slot>
+</x-normal-layout>

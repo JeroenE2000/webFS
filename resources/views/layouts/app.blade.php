@@ -97,24 +97,24 @@
                             </button>
                             <div class="collapse navbar-collapse  justify-content-center" id="navbarNav">
                                 <ul class="navbar-nav">
-                                    {{-- <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
+                                    <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
                                         <a href="{{url('/')}}" class="nav-link text-white">Home</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="{{route('getMenuCard')}}" class="nav-link text-white">Menukaart</a>
+                                        <a href="" class="nav-link text-white">Menukaart</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="{{url('/guest/news')}}" class="nav-link text-white">Nieuws</a>
+                                        <a href="" class="nav-link text-white">Nieuws</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="{{url('/guest/contact')}}" class="nav-link text-white">Contact</a>
+                                        <a href="" class="nav-link text-white">Contact</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="{{url('/sale')}}" class="nav-link text-white">Aanbiedingen</a>
+                                        <a href="" class="nav-link text-white">Aanbiedingen</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="{{route('getGuestCategories')}}" class="nav-link text-white">Bestellen (Afhalen)</a>
-                                    </li> --}}
+                                        <a href="" class="nav-link text-white">Bestellen (Afhalen)</a>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
@@ -122,11 +122,11 @@
                     <br>
                     <div>
                         <br>
-                        @yield('content')
+                        {{$main}}
                     </div>
 
                     <div class="text-center pt-3">
-                        {{-- <a href="{{url('/guest/contact')}}">Naar Contact</a> --}}
+                        <a href="">Naar Contact</a>
                     </div>
                     </div>
                 </div>
