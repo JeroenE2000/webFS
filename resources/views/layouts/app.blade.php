@@ -104,10 +104,10 @@
                                         <a href="" class="nav-link text-white">Menukaart</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Nieuws</a>
+                                        <a href="{{url('/news')}}" class="nav-link text-white">Nieuws</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Contact</a>
+                                        <a href="{{url('/contact')}}" class="nav-link text-white">Contact</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
                                         <a href="" class="nav-link text-white">Aanbiedingen</a>
