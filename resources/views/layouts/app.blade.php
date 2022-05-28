@@ -122,7 +122,7 @@
                     <br>
                     <div>
                         <br>
-                        {{$main}}
+                        @yield('content')
                     </div>
 
                     <div class="text-center pt-3">
