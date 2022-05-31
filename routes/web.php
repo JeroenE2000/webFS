@@ -1,8 +1,12 @@
 <?php
 
-use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategorieController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +28,34 @@ Route::get('/contact',function(){
 Route::get('/news',function(){
     return view('guest.news');
 });
-Auth::routes();
+
+Auth::routes(['register' => false]);
+
+
+Route::group(['prefix' => 'cms'], function() {
+    Route::get('/signout', function() {
+        Session::flush();
+        Auth::logout();
+        return Redirect("/login");
+    });
+    Route::group(['middleware' => ['auth']], function() {
+        Route::get('/home', function () {
+            return View::make('cms.home');
+            });
+    });
+
+
+    Route::middleware(['isAdmin'])->group(function(){
+        Route::resource('/categories', CategorieController::class)->except(['show']);
+        Route::resource('/dishes', DishController::Class)->except(['show']);
+        Route::resource('/users', UserController::class)->except(['show']);
+    });
+
+    Route::middleware(['isCashier'])->group(function(){
+
+    });
+
+});
+
+
 
