@@ -1,11 +1,13 @@
 <?php
 
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\DishController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\CategorieController;
 
 /*
@@ -44,10 +46,11 @@ Route::group(['prefix' => 'cms'], function() {
             });
     });
 
+    Route::put('/dishes/search', [DishController::class, 'search'])->name('dishes.search');
 
     Route::middleware(['isAdmin'])->group(function(){
         Route::resource('/categories', CategorieController::class)->except(['show']);
-        Route::resource('/dishes', DishController::Class)->except(['show']);
+        Route::resource('/dishes', DishController::class)->except(['show']);
         Route::resource('/users', UserController::class)->except(['show']);
     });
 

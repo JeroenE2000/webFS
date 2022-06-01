@@ -13,6 +13,12 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.5.2/css/OverlayScrollbars.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
 
 
 </head>
@@ -73,6 +79,12 @@
             <a href="{{url('cms/categories')}}" class="nav-link">
               <i class="nav-icon far fa fa-tag"></i>
               <p>Categories</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/dishes')}}" class="nav-link">
+              <i class="nav-icon far fa fa-tag"></i>
+              <p>Dishes</p>
             </a>
           </li>
           @endif

@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('categorie_id')->references('id')->on('categories')->cascadeOnDelete();
+            $table->string('categorie_id');
+            $table->foreign('categorie_id')->references('name')->on('categories')->cascadeOnDelete();
             $table->integer("dishnumber")->nullable();
             $table->string("dish_addition")->nullable();
             $table->string("name");
