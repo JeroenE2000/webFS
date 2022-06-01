@@ -26,6 +26,10 @@
                         <input type="text" class="form-control" id="name" name="name" value="@if(old('name') !== null){{ old('name') }}@else{!! $course->name !!}@endif" placeholder="Vul gerecht naam in">
                     </div>
                     <div class="form-group mt-2" >
+                        <label for="name">Dish nummer</label>
+                        <input type="text" class="form-control" id="dish_number" name="dish_number" value="@if(old('dishnumber') !== null){{ old('dishnumber') }}@else{!! $course->dishnumber !!}@endif" placeholder="Vul dish nummer in">
+                    </div>
+                    <div class="form-group mt-2" >
                         <label for="name">Dish additon</label>
                         <input type="text" class="form-control" id="dish_addition" name="dish_addition" value="@if(old('dish_addition') !== null){{ old('dish_addition') }}@else{!! $course->dish_addition !!}@endif" placeholder="Vul dish addition in">
                     </div>
@@ -33,10 +37,10 @@
                         <label for="category_id">Categorie</label>
                         <select  class="form-control" name="category_id" id="category_id">
                             @foreach($categories as $category)
-                                @if(old('category_id') !== null && old('category_id') == $category->id)
-                                    <option value="{{$category->id}}" selected>{{$category->name}}</option>
+                                @if(old('category_id') !== null && old('category_id') == $category->name)
+                                    <option value="{{$category->name}}" selected>{{$category->name}}</option>
                                 @else
-                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                    <option value="{{$category->name}}">{{$category->name}}</option>
                                 @endif
                             @endforeach
                         </select>

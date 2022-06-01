@@ -104,6 +104,7 @@ class DishController extends Controller
         $dish = Dishes::find($id);
         $dish->name = $request->input('name');
         $dish->price = $request->input('price');
+        $dish->dishnumber = $request->input('dish_number');
         $dish->categorie_id = $request->input('category_id');
         $dish->spicness_scale = $request->input('spicness_scale');
         $dish->description = $request->input('description');
