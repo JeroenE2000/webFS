@@ -14,9 +14,21 @@ class DishController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $dishes = Dishes::with('Allergies' , 'Categories')->orderby('dishnumber')->get();
+        if(isset($request->dishsearch)) {
+            #where search name or dishnumber in dishes with allergies and categories
+            $dishes = Dishes::where('name', 'like', '%' . $request->dishsearch . '%')
+                ->orWhere('dishnumber', 'like', '%' . $request->dishsearch . '%')
+                ->with('Allergies')
+                ->with('Categories')
+                ->get();
+        } else {
+            $dishes = Dishes::with('Allergies' , 'Categories')->get();
+        }
+        if(isset($request->category)) {
+            $dishes = $dishes->where('categorie_id', $request->category);
+        }
         $categories = Categories::all();
         $allergies = Allergies::all();
         return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies]);
@@ -132,17 +144,5 @@ class DishController extends Controller
         $dish = Dishes::find($id);
         $dish->delete();
         return redirect()->route('dishes.index');
-    }
-
-    public function search(Request $request) {
-
-        $dish = $request->input('search');
-        if(empty($dish)) {
-            return redirect()->route('dishes.index');
-        }
-        $categories = Categories::all();
-        $dishes = Dishes::search($dish)->get();
-        $allergies = Allergies::all();
-        return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies]);
     }
 }

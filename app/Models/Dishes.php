@@ -2,13 +2,12 @@
 
 namespace App\Models;
 
-use Laravel\Scout\Searchable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Dishes extends Model
 {
-    use HasFactory, Searchable;
+    use HasFactory;
     protected $table = 'dishes';
     protected $primaryKey = 'id';
 
@@ -21,20 +20,6 @@ class Dishes extends Model
         'description',
         'spicness_scale',
     ];
-
-
-    public function toSearchableArray()
-    {
-        return [
-            'dishnumber' => $this->dishnumber,
-            'dish_addition'=> $this->dish_addition,
-            'name' => $this->name,
-            'price'=> $this->price,
-            'description' => $this->description,
-            'spicness_scale' => $this->spicness_scale,
-            'categorie_Id' => $this->categorie_id,
-        ];
-    }
 
     public function Categories()
     {

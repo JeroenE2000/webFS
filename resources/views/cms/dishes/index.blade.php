@@ -24,14 +24,17 @@
     <div class="container-fluid">
         <div class="row">
            <div class="col-lg-12 margin-tb">
-                <form method="POST" class="mt-4" action="{{ route('dishes.search') }}">
-                      @csrf
-                      @method('GET')
-                      <div class="col-md-3">
-                          <input value="{{ request()->get('search') }}" type="search" name="search" class="form-control">
-                          <button type="submit" name="buttonsearch" class="btn btn-primary mt-4">Search</button>
-                      </div>
-                  </form>
+            <form action="dishes" method="GET" class="form-inline mb-3">
+                @csrf
+                <input class="form-control col-sm-2 mr-sm-2" name="dishsearch" type="search" placeholder="Zoeken..." aria-label="Zoeken">
+                <select name="category" class="form-select col-md-1 mr-sm-2" aria-label="Categorie">
+                    <option selected></option>
+                    @foreach($categories as $c)
+                    <option value="{{$c->id}}">{{$c->name}}</option>
+                    @endforeach
+                </select>
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoek</button>
+            </form>
             </div>
            </div>
     </div>
