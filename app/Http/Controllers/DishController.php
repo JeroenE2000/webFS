@@ -16,7 +16,7 @@ class DishController extends Controller
      */
     public function index()
     {
-        $dishes = Dishes::with('Allergies')->orderby('dishnumber')->paginate(5);
+        $dishes = Dishes::with('Allergies' , 'Categories')->orderby('dishnumber')->get();
         $categories = Categories::all();
         $allergies = Allergies::all();
         return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies]);
@@ -140,8 +140,8 @@ class DishController extends Controller
         if(empty($dish)) {
             return redirect()->route('dishes.index');
         }
-        $dishes = Dishes::search($dish)->paginate(5);
         $categories = Categories::all();
+        $dishes = Dishes::search($dish)->get();
         $allergies = Allergies::all();
         return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies]);
     }

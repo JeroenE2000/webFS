@@ -26,7 +26,7 @@
            <div class="col-lg-12 margin-tb">
                 <form method="POST" class="mt-4" action="{{ route('dishes.search') }}">
                       @csrf
-                      @method('put')
+                      @method('GET')
                       <div class="col-md-3">
                           <input value="{{ request()->get('search') }}" type="search" name="search" class="form-control">
                           <button type="submit" name="buttonsearch" class="btn btn-primary mt-4">Search</button>
@@ -64,7 +64,11 @@
                             <tr>
                                 <td>{{$d->dishnumber}}</td>
                                 <td>{{$d->dish_addition}}</td>
-                                <td>{{$d->categorie_id}}</td>
+                                @foreach($categories as $c)
+                                    @if($c->id == $d->categorie_id)
+                                        <td>{{$c->name}}</td>
+                                    @endif
+                                @endforeach
                                 <td>
                                 @foreach($d->Allergies as $a )
                                 {{$a->name}}
@@ -105,7 +109,7 @@
                     </table>
                 </div>
                <div class="mt-4">
-                {!! $dishes->links('pagination::bootstrap-4')!!}
+                {{-- {!! $dishes->links('pagination::bootstrap-4')!!} --}}
                 </div>
             </div>
         </div>
@@ -145,7 +149,7 @@
                             <label for="category_id">Categorie</label>
                             <select class="form-control" name="category_id" id="category_id">
                                 @foreach($categories as $c)
-                                <option value="{{$c->name}}">{{$c->name}}</option>
+                                <option value="{{$c->id}}">{{$c->name}}</option>
                                 @endforeach
                             </select>
                         </div>
