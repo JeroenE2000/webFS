@@ -40,23 +40,23 @@
                     <tbody>
                         @foreach($categories as $c)
                         <tr>
-                            <form id="update-categorie{{$c->name}}" method="POST">
+                            <form id="update-categorie{{$c->id}}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <td>
-                                    <input type="text" name="name" id="name{{$c->name}}" value="{{$c->name}}" class="form-control"/>
+                                    <input type="text" name="name" id="name{{$c->id}}" value="{{$c->name}}" class="form-control"/>
                                 </td>
 
                             </form>
                         <td>{{$c->created_at}}</td>
                         <td>
-                            <button type="submit" form="update-categorie{{$c->name}}" formaction="{{ route('categories.update', $c->name) }}" id="update{{$c->name}}" class="btn btn-success">Bijwerken</button>
+                            <button type="submit" form="update-categorie{{$c->id}}" formaction="{{ route('categories.update', $c->id) }}" id="update{{$c->id}}" class="btn btn-success">Bijwerken</button>
                             </td>
                             <td>
-                                <form action="{{ route('categories.destroy', $c->name) }}" method="POST">
+                                <form action="{{ route('categories.destroy', $c->id) }}" method="POST">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" id="delete{{$c->name}}" class="btn btn-danger">Verwijderen</button>
+                                    <button type="submit" id="delete{{$c->id}}" class="btn btn-danger">Verwijderen</button>
                                 </form>
                             </td>
                         </div>
