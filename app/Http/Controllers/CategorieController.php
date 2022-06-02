@@ -45,9 +45,7 @@ class CategorieController extends Controller
         $request->validate([
             'name' => 'required|unique:categories|max:255',
         ]);
-        Categories::where('name' ,$id)->update([
-            'name' => $request->input('name'),
-        ]);
+        Categories::findOrFail($id)->update($request->all());
         return redirect()->route('categories.index')->with('success', 'Categorie updated successfully.');
     }
 
@@ -59,7 +57,7 @@ class CategorieController extends Controller
      */
     public function destroy($id)
     {
-        Categories::where('name' ,$id)->delete();
+        Categories::findOrFail($id)->delete();
         return redirect()->route('categories.index')->with('success', 'Categorie deleted successfully.');
     }
 }
