@@ -46,7 +46,7 @@ Route::group(['prefix' => 'cms'], function() {
             });
     });
 
-    Route::put('/dishes/search', [DishController::class, 'search'])->name('dishes.search');
+    Route::get('/dishes/search', [DishController::class, 'search'])->name('dishes.search');
 
     Route::middleware(['isAdmin'])->group(function(){
         Route::resource('/categories', CategorieController::class)->except(['show']);
