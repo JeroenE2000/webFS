@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Session;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\GuestController;
 use App\Http\Controllers\CategorieController;
 
 /*
@@ -30,6 +31,9 @@ Route::get('/contact',function(){
 Route::get('/news',function(){
     return view('guest.news');
 });
+
+Route::get('/categories', [GuestController::class, 'index'])->name('categories');
+Route::get('/{category_id}/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
 
 Auth::routes(['register' => false]);
 

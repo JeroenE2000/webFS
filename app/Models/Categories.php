@@ -17,6 +17,6 @@ class Categories extends Model
 
     public function Dishes()
     {
-        return $this->belongsToMany(Dishes::class);
+        return $this->hasMany(Dishes::class);
     }
 }

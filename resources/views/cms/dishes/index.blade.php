@@ -68,7 +68,7 @@
                                 <td>{{$d->dishnumber}}</td>
                                 <td>{{$d->dish_addition}}</td>
                                 @foreach($categories as $c)
-                                    @if($c->id == $d->categorie_id)
+                                    @if($c->id == $d->categories_id)
                                         <td>{{$c->name}}</td>
                                     @endif
                                 @endforeach
@@ -110,9 +110,6 @@
                             </tr>
                         </tfoot>
                     </table>
-                </div>
-               <div class="mt-4">
-                {{-- {!! $dishes->links('pagination::bootstrap-4')!!} --}}
                 </div>
             </div>
         </div>

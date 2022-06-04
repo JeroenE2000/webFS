@@ -12,7 +12,7 @@ class Dishes extends Model
     protected $primaryKey = 'id';
 
     public $fillable = [
-        'categorie_id',
+        'categories_id',
         'dishnumber',
         'dish_addition',
         'name',
@@ -23,7 +23,7 @@ class Dishes extends Model
 
     public function Categories()
     {
-        return $this->belongsTo(Categories::class , 'categorie_id');
+        return $this->belongsTo(Categories::class);
     }
 
     public function Allergies()
