@@ -27,7 +27,7 @@ class DishController extends Controller
             $dishes = Dishes::with('Allergies' , 'Categories')->get();
         }
         if(isset($request->category)) {
-            $dishes = $dishes->where('categorie_id', $request->category);
+            $dishes = $dishes->where('categories_id', $request->category);
         }
         $categories = Categories::all();
         $allergies = Allergies::all();
@@ -42,6 +42,14 @@ class DishController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'name' => 'required',
+            'price' => 'required|numeric',
+            'category_id' => 'required',
+            'spicness_scale' => 'required|integer|between:0,3',
+            'dish_addition' => 'max:3'
+        ]);
+
         $name = $request->input('name');
         $spiciness = $request->input('spiciness');
         $allergens = $request->input('allergens');
@@ -56,7 +64,7 @@ class DishController extends Controller
             'spiciness' => $spiciness,
             'dish_addition' => $dish_additon,
             'price' => $price,
-            'categorie_id' => $category_id,
+            'categories_id' => $category_id,
             'description' => $description,
             'dishnumber' => $number
         ]);
@@ -105,7 +113,7 @@ class DishController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->validate($request, [
+        $request->validate([
             'name' => 'required',
             'price' => 'required|numeric',
             'category_id' => 'required',
@@ -117,7 +125,7 @@ class DishController extends Controller
         $dish->name = $request->input('name');
         $dish->price = $request->input('price');
         $dish->dishnumber = $request->input('dish_number');
-        $dish->categorie_id = $request->input('category_id');
+        $dish->categories_id = $request->input('category_id');
         $dish->spicness_scale = $request->input('spicness_scale');
         $dish->description = $request->input('description');
         $dish->dish_addition = $request->input('dish_addition');

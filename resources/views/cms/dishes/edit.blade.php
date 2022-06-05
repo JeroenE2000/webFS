@@ -37,7 +37,7 @@
                         <label for="category_id">Categorie</label>
                         <select  class="form-control" name="category_id" id="category_id">
                             @foreach($categories as $category)
-                                @if(old('category_id') !== null && old('category_id') == $category->id)
+                                @if(old('categories_id') !== null && old('categories_id') == $category->id)
                                     <option value="{{$category->id}}" selected>{{$category->name}}</option>
                                 @else
                                     <option value="{{$category->id}}">{{$category->name}}</option>
