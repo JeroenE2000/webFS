@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Dishes extends Model
 {
@@ -23,7 +23,7 @@ class Dishes extends Model
 
     public function Categories()
     {
-        return $this->belongsTo(Categories::class);
+        return $this->belongsTo(Categories::class , 'categorie_id');
     }
 
     public function Allergies()
@@ -33,7 +33,7 @@ class Dishes extends Model
 
     public function Orders()
     {
-        return $this->belongsToMany(Orders::class);
+        return $this->belongsToMany(Orders::class , 'orders_dishes' , 'dish_id' , 'order_id');
     }
 
     public function Discounts()
