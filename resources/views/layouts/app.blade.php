@@ -101,7 +101,7 @@
                                         <a href="{{url('/')}}" class="nav-link text-white">Home</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Menukaart</a>
+                                        <a href="{{url('/categories')}}" class="nav-link text-white">Menukaart</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
                                         <a href="{{url('/news')}}" class="nav-link text-white">Nieuws</a>
@@ -111,9 +111,6 @@
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
                                         <a href="" class="nav-link text-white">Aanbiedingen</a>
-                                    </li>
-                                    <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Bestellen (Afhalen)</a>
                                     </li>
                                 </ul>
                             </div>
