@@ -15,7 +15,6 @@ class SalesController extends Controller
      */
     public function index()
     {
-        #get all sales of products
         $sales = HistoryOfDiscounts::all();
         $dishes = Dishes::all();
         return view('cms.sales.index', compact('sales', 'dishes'));
@@ -128,5 +127,11 @@ class SalesController extends Controller
         $discount = HistoryOfDiscounts::find($id);
         $discount->delete();
         return redirect()->route('discounts.index')->with('success', 'Korting verwijderd');
+    }
+
+    public function getSales() {
+        $sales = HistoryOfDiscounts::all();
+        $dishes = Dishes::all();
+        return view('guest.sales', compact('sales', 'dishes'));
     }
 }

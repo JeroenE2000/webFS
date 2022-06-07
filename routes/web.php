@@ -36,6 +36,7 @@ Route::get('/news',function(){
 Route::get('/categories', [GuestController::class, 'index'])->name('categories');
 Route::get('/download-menu-as-pdf',[GuestController::class, 'pdfConverter'])->name('downloadMenu');
 Route::get('/{category_id}/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
+Route::get('/sale', [SalesController::class, 'getSales'])->name('sale');
 
 Auth::routes();
 

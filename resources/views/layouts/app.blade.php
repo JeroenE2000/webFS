@@ -110,7 +110,7 @@
                                         <a href="{{url('/contact')}}" class="nav-link text-white">Contact</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Aanbiedingen</a>
+                                        <a href="{{url('/sale')}}" class="nav-link text-white">Aanbiedingen</a>
                                     </li>
                                 </ul>
                             </div>
