@@ -38,10 +38,8 @@
                                 <th>Discount</th>
                                 <th>Start tijd</th>
                                 <th>Eind tijd</th>
-                                @if(auth()->user()->role_id == 1)
-                                    <th>Bijwerken</th>
-                                    <th>Verwijderen</th>
-                                @endif
+                                <th>Bijwerken</th>
+                                <th>Verwijderen</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -56,7 +54,6 @@
                                         <td>{{$sale->end_time}}</td>
                                     @endif
                                 @endforeach
-                                @if(auth()->user()->role_id == 1)
                                         <td>
                                             <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('discounts.edit',$sale) }}">Bijwerken</a>
                                         </td>
@@ -67,7 +64,6 @@
                                                 <button type="submit" id="delete{{$sale->id}}" class="btn btn-danger">Verwijderen</button>
                                             </form>
                                         </td>
-                                @endif
                                     </tr>
                             @endforeach
                         </tbody>
@@ -78,10 +74,8 @@
                                 <th>Discount</th>
                                 <th>Start tijd</th>
                                 <th>Eind tijd</th>
-                                @if(auth()->user()->role_id == 1)
-                                    <th>Bijwerken</th>
-                                    <th>Verwijderen</th>
-                                @endif
+                                <th>Bijwerken</th>
+                                <th>Verwijderen</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -89,7 +83,6 @@
             </div>
         </div>
     </div>
-    @if(auth()->user()->role_id == 1)
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
@@ -129,7 +122,6 @@
             </div>
         </div>
     </div>
-    @endif
 </section>
 
 
