@@ -35,7 +35,8 @@
                    <h3 class="card-title">Gebruikers</h3>
                 </div>
                  <div class="card-body">
-                         <table id="" class="table table-bordered table-hover">
+                    <div class="table-responsive">
+                        <table id="table_id" class="table table-bordered table-hover">
                              <thead>
                                  <tr>
                                     <td>Role</td>
@@ -63,7 +64,8 @@
                                  @endforeach
                              </tbody>
                          </table>
-                     </div>
+                        </div>
+                    </div>
              </div>
           </div>
        </div>
