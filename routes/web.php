@@ -9,6 +9,7 @@ use App\Http\Controllers\DishController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\SalesController;
 use App\Http\Controllers\CategorieController;
 
 /*
@@ -55,16 +56,16 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
         Route::get('/home', function () {
             return View::make('cms.home');
         });
+
         Route::middleware('checkRole:admin')->group(function(){
-            Route::resource('/categories', CategorieController::class)->except(['show'])->middleware('isAdmin');
-            Route::resource('/dishes', DishController::class)->except(['show']);
+            Route::resource('/categories', CategorieController::class)->except(['show']);
             Route::resource('/users', UserController::class)->except(['show']);
         });
-        Route::middleware('checkRole:kassamedewerker')->group(function(){
-            Route::resource('/dishes', DishController::class)->except(['show','create','store' ,'edit','update','destroy']);
+        Route::middleware('checkRole:kassamedewerker,serveerster,admin')->group(function(){
+            Route::resource('/dishes', DishController::class);
         });
-        Route::middleware('checkRole:serveerster')->group(function(){
-            Route::resource('/dishes', DishController::class)->only(['index']);
+        Route::middleware('checkRole:admin,kassamedewerker')->group(function(){
+            Route::resource('/discounts', SalesController::class)->except(['show']);
         });
     });
 });

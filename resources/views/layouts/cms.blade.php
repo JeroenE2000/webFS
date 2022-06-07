@@ -82,10 +82,18 @@
             </a>
           </li>
           @endif
+          @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
           <li class="nav-item">
             <a href="{{url('cms/dishes')}}" class="nav-link">
               <i class="nav-icon far fa fa-tag"></i>
               <p>Dishes</p>
+            </a>
+          </li>
+          @endif
+          <li class="nav-item">
+            <a href="{{url('cms/discounts')}}" class="nav-link">
+              <i class="nav-icon far fa fa-tag"></i>
+              <p>Discounts</p>
             </a>
           </li>
 

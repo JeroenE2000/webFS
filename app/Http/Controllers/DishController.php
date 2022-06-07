@@ -17,7 +17,6 @@ class DishController extends Controller
     public function index(Request $request)
     {
         if(isset($request->dishsearch)) {
-            #where search name or dishnumber in dishes with allergies and categories
             $dishes = Dishes::where('name', 'like', '%' . $request->dishsearch . '%')
                 ->orWhere('dishnumber', 'like', '%' . $request->dishsearch . '%')
                 ->with('Allergies')
