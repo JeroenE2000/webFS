@@ -81,6 +81,12 @@
               <p>Categories</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('cms/users')}}" class="nav-link">
+              <i class="nav-icon far fa fa-tag"></i>
+              <p>Gebruikers</p>
+            </a>
+          </li>
           @endif
           @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
           <li class="nav-item">
