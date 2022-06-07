@@ -58,8 +58,10 @@
                                 <th>Prijs</th>
                                 <th>Beschrijving</th>
                                 <th>Spice scale</th>
-                                <th>Bijwerken</th>
-                                <th>Verwijderen</th>
+                                @if(auth()->user()->role_id == 1)
+                                    <th>Bijwerken</th>
+                                    <th>Verwijderen</th>
+                                @endif
                             </tr>
                         </thead>
                         <tbody>
@@ -81,16 +83,18 @@
                                 <td>€ {{$d->price}}</td>
                                 <td>{{$d->description}}</td>
                                 <td>{{$d->spicness_scale}}</td>
-                            <td>
-                                <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('dishes.edit',$d) }}">Bijwerken</a>
-                                </td>
-                                <td>
-                                    <form action="{{ route('dishes.destroy', $d->id) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" id="delete{{$d->id}}" class="btn btn-danger">Verwijderen</button>
-                                    </form>
-                                </td>
+                                @if(auth()->user()->role_id == 1)
+                                    <td>
+                                        <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('dishes.edit',$d) }}">Bijwerken</a>
+                                    </td>
+                                    <td>
+                                        <form action="{{ route('dishes.destroy', $d->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" id="delete{{$d->id}}" class="btn btn-danger">Verwijderen</button>
+                                        </form>
+                                    </td>
+                                @endif
                             </div>
                             </tr>
                             @endforeach
@@ -105,8 +109,10 @@
                                 <th>Prijs</th>
                                 <th>Beschrijving</th>
                                 <th>Spice scale</th>
-                                <th>Bijwerken</th>
-                                <th>Verwijderen</th>
+                                @if(auth()->user()->role_id == 1)
+                                    <th>Bijwerken</th>
+                                    <th>Verwijderen</th>
+                                @endif
                             </tr>
                         </tfoot>
                     </table>
@@ -115,6 +121,7 @@
         </div>
         </div>
     </div>
+    @if(auth()->user()->role_id == 1)
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-4">
@@ -169,7 +176,8 @@
             </div>
             </div>
         </div>
-       </div>
+    </div>
+    @endif
 </section>
 <script type="text/javascript">
     $(document).ready(function() {
