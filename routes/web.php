@@ -33,35 +33,40 @@ Route::get('/news',function(){
 });
 
 Route::get('/categories', [GuestController::class, 'index'])->name('categories');
+Route::get('/download-menu-as-pdf',[GuestController::class, 'pdfConverter'])->name('downloadMenu');
 Route::get('/{category_id}/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
 
-Auth::routes(['register' => false]);
+Auth::routes();
 
+Route::get('/signout', function() {
+    Session::flush();
+    Auth::logout();
+    return Redirect("/login");
+});
 
-Route::group(['prefix' => 'cms'], function() {
-    Route::get('/signout', function() {
-        Session::flush();
-        Auth::logout();
-        return Redirect("/login");
-    });
-    Route::group(['middleware' => ['auth']], function() {
+Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function(){
+    Route::group(['prefix' => 'cms'], function() {
+        Route::get('/signout', function() {
+            Session::flush();
+            Auth::logout();
+            return Redirect("/login");
+        });
+        Route::get('/dishes/search', [DishController::class, 'search'])->name('dishes.search');
         Route::get('/home', function () {
             return View::make('cms.home');
-            });
+        });
+        Route::middleware('checkRole:admin')->group(function(){
+            Route::resource('/categories', CategorieController::class)->except(['show'])->middleware('isAdmin');
+            Route::resource('/dishes', DishController::class)->except(['show']);
+            Route::resource('/users', UserController::class)->except(['show']);
+        });
+        Route::middleware('checkRole:kassamedewerker')->group(function(){
+            Route::resource('/dishes', DishController::class)->except(['show','create','store' ,'edit','update','destroy']);
+        });
+        Route::middleware('checkRole:serveerster')->group(function(){
+            Route::resource('/dishes', DishController::class)->only(['index']);
+        });
     });
-
-    Route::get('/dishes/search', [DishController::class, 'search'])->name('dishes.search');
-
-    Route::middleware(['isAdmin'])->group(function(){
-        Route::resource('/categories', CategorieController::class)->except(['show']);
-        Route::resource('/dishes', DishController::class)->except(['show']);
-        Route::resource('/users', UserController::class)->except(['show']);
-    });
-
-    Route::middleware(['isCashier'])->group(function(){
-
-    });
-
 });
 
 

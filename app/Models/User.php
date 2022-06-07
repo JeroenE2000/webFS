@@ -43,11 +43,16 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles(){
-        return $this->belongsTo(Role::class, 'role_id');
+    public function hasRole($role)
+    {
+        if ($this->roles()->name == $role) {
+            return true;
+        }
+        return false;
     }
 
-    public function table() {
-        return $this->belongsToMany(Table::class);
+    public function roles()
+    {
+        return Roles::find($this->id);
     }
 }

@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Categories;
+use App\Models\Dishes;
 use App\Models\HistoryOfDiscounts;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class GuestController extends Controller
 {
@@ -35,5 +37,16 @@ class GuestController extends Controller
         }
         $sales = $tempsales;
         return view('guest.dishes', ['dishes' => $dishes, 'sales' => $sales, 'category' => $category]);
+    }
+
+    public function pdfConverter() {
+        $dishes = Dishes::all();
+        $categories = Categories::all();
+        $sales = HistoryOfDiscounts::where('start_time', '<=', date('Y-m-d H:i:s'))
+            ->where('end_time', '>=', date('Y-m-d H:i:s'))
+            ->get();
+        $data = ['dishes'=>$dishes,'categories'=>$categories, 'sales' => $sales];
+        $pdf = PDF::loadView('guest.menu-pdf', $data);
+        return $pdf->stream();
     }
 }

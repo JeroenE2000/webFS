@@ -81,13 +81,14 @@
               <p>Categories</p>
             </a>
           </li>
+          @endif
           <li class="nav-item">
             <a href="{{url('cms/dishes')}}" class="nav-link">
               <i class="nav-icon far fa fa-tag"></i>
               <p>Dishes</p>
             </a>
           </li>
-          @endif
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
