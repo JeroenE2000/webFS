@@ -61,7 +61,6 @@
                 <i class="ion ion-person" style="font-size: 16px"></i> Welkom {{ Auth::user()->name }}</i>
             </a>
             <p></p>
-
             <a href="{{ route('logout') }}"   onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="d-block">
                 <i class="ion-log-out" style="font-size: 16px"></i> Uitloggen</i>
             </a>
@@ -78,29 +77,34 @@
           <li class="nav-item">
             <a href="{{url('cms/categories')}}" class="nav-link">
               <i class="nav-icon far fa fa-tag"></i>
-              <p>Categories</p>
+              <p>Categorieen</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{url('cms/users')}}" class="nav-link">
-              <i class="nav-icon far fa fa-tag"></i>
+              <i class="nav-icon far fa fa-user"></i>
               <p>Gebruikers</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{url('cms/allergies')}}" class="nav-link">
+              <i class="nav-icon far fa fa-tag"></i>
+              <p>Allergieen</p>
             </a>
           </li>
           @endif
           <li class="nav-item">
             <a href="{{url('cms/dishes')}}" class="nav-link">
-              <i class="nav-icon far fa fa-tag"></i>
-              <p>Dishes</p>
+              <i class="nav-icon far fa fa-croissant"></i>
+              <p>Gerechten</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{url('cms/discounts')}}" class="nav-link">
-              <i class="nav-icon far fa fa-tag"></i>
-              <p>Discounts</p>
+              <i class="nav-icon far fa fa-badge-dollar"></i>
+              <p>Kortingen</p>
             </a>
           </li>
-
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

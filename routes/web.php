@@ -10,6 +10,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\AllergiesController;
 use App\Http\Controllers\CategorieController;
 
 /*
@@ -61,6 +62,7 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
         Route::middleware('checkRole:admin')->group(function(){
             Route::resource('/categories', CategorieController::class)->except(['show']);
             Route::resource('/users', UserController::class)->except(['show']);
+            Route::resource('/allergies', AllergiesController::class)->except(['show']);
         });
         Route::middleware('checkRole:kassamedewerker,serveerster,admin')->group(function(){
             Route::resource('/dishes', DishController::class);
