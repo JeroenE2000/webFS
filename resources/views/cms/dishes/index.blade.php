@@ -22,30 +22,74 @@
 @endif
 <section class="content">
     <div class="container-fluid">
-        <div class="row">
+        <div class="row ">
            <div class="col-lg-12 margin-tb">
-            <form action="dishes" method="GET" class="form-inline mb-3">
-                @csrf
-                <input class="form-control col-sm-2 mr-sm-2" name="dishsearch" type="search" placeholder="Zoeken..." aria-label="Zoeken">
-                <select name="category" class="form-select col-md-1 mr-sm-2" aria-label="Categorie">
-                    <option selected></option>
-                    @foreach($categories as $c)
-                    <option value="{{$c->id}}">{{$c->name}}</option>
-                    @endforeach
-                </select>
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoek</button>
-            </form>
+                <form action="dishes" method="GET" class="form-inline mb-3">
+                    @csrf
+                    <input class="form-control col-sm-2 mr-sm-2" name="dishsearch" type="search" placeholder="Zoeken..." aria-label="Zoeken">
+                    <select name="category" class="form-select col-md-1 mr-sm-2" aria-label="Categorie">
+                        <option selected></option>
+                        @foreach($categories as $c)
+                            <option value="{{$c->id}}">{{$c->name}}</option>
+                        @endforeach
+                    </select>
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Zoek</button>
+                </form>
             </div>
-           </div>
+        </div>
     </div>
    <div class="container-fluid">
       <div class="row">
-         <div class="col-12 col-sm-12">
+          @if(auth()->user()->role_id == 2)
+            <div class="col-12 col-sm-12">
+                <div class="card">
+                    <div class="card-header">
+                       <h3 class="card-title">Bestelling maken</h3>
+                    </div>
+                    <form id ="formOrdering" action="" method="post">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <div class="hidden-scrollbar">
+                                    <table id="orderList" class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>id</th>
+                                                <th>naam</th>
+                                                <th>prijs</th>
+                                                <th>opmerking</th>
+                                                <th>aantal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="float-left">
+                                    Totaal
+                                </div>
+                                <div class="float-right">
+                                    <span id="totalPRICE">€ 0,00</span>
+                                </div>
+                            </div>
+                            <div class="card-footer align-self-end ">
+                                <button type="submit" id = "submitBtn" class="btn btn-success">Afrekenen</button>
+                                <button type="submit" id = "btnRemove" class="btn btn-danger">Verwijderen</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </form>
+            </div>
+            <div class="col-12 col-sm-12">
+        @endif
             <div class="card">
                <div class="card-header">
                   <h3 class="card-title">Dishes</h3>
                </div>
                <div class="card-body">
+                <a href="{{ route('cart.index') }}" class="flex items-centerbtn btn-success">Winkelmandje</a>
+
                 <div class="table-responsive">
                     <table id="table_id" class="table table-bordered table-hover">
                         <thead>
@@ -62,6 +106,7 @@
                                     <th>Bijwerken</th>
                                     <th>Verwijderen</th>
                                 @endif
+                                <th>Toevoegen</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -95,6 +140,17 @@
                                         </form>
                                     </td>
                                 @endif
+                                <td>
+                                    <form action="{{ route('cart.store') }}" method="POST">
+                                        @csrf
+                                        <input type="hidden" value="{{ $d->id }}" name="id">
+                                        <input type="hidden" value="{{ $d->name }}" name="name">
+                                        <input type="hidden" value="{{ $d->price }}" name="price">
+                                        <input type="hidden" value=""  name="opmerking">
+                                        <input type="hidden" value="1" name="quantity">
+                                        <button type="submit" class="btn btn-success md-4">Add to cart</button>
+                                    </form>
+                                </td>
                             </div>
                             </tr>
                             @endforeach
@@ -113,6 +169,7 @@
                                     <th>Bijwerken</th>
                                     <th>Verwijderen</th>
                                 @endif
+                                <th>Toevoegen</th>
                             </tr>
                         </tfoot>
                     </table>
@@ -156,7 +213,7 @@
                             <label for="category_id">Categorie</label>
                             <select class="form-control" name="category_id" id="category_id">
                                 @foreach($categories as $c)
-                                <option value="{{$c->id}}">{{$c->name}}</option>
+                                    <option value="{{$c->id}}">{{$c->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -164,7 +221,7 @@
                             <label for="allergies">Allergieen</label>
                             <select class="row selectpicker" multiple data-live-search="true"  multiple ="multiple" name="allergens[]" id="allergens">
                                 @foreach($allergies as $a)
-                                <option value="{{$a->id}}">{{$a->name}}</option>
+                                    <option value="{{$a->id}}">{{$a->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -184,5 +241,7 @@
         $('allergens').selectpicker();
     });
 </script>
+<script src="{{ asset('js/cashDesk.js') }}"></script>
+
 
 @endsection

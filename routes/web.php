@@ -5,10 +5,12 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\AllergiesController;
 use App\Http\Controllers\CategorieController;
@@ -36,8 +38,16 @@ Route::get('/news',function(){
 
 Route::get('/categories', [GuestController::class, 'index'])->name('categories');
 Route::get('/download-menu-as-pdf',[GuestController::class, 'pdfConverter'])->name('downloadMenu');
-Route::get('/{category_id}/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
+Route::get('/{category_id}/table/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
 Route::get('/sale', [SalesController::class, 'getSales'])->name('sale');
+
+Route::middleware('checkRole:user')->group(function(){
+    Route::get('/order', [OrderController::class , 'index'])->name('order');
+    Route::post('/store_table_number', [OrderController::class ,'storeTableNumber'])->name('postTableNumber');
+    Route::get('/order/categories', [OrderController::class, 'getCategories'])->name('tableCategories');
+    Route::get('/{category_id}/get-courses',[OrderController::class, 'getDishes'])->name('getTableCourses');
+});
+
 
 Auth::routes();
 
@@ -69,6 +79,12 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
         });
         Route::middleware('checkRole:admin,kassamedewerker')->group(function(){
             Route::resource('/discounts', SalesController::class)->except(['show']);
+            Route::get('/cart', [CartController::class, 'cartList'])->name('cart.index');
+            Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.store');
+            Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+            Route::post('/remove', [CartController::class, 'removeCart'])->name('cart.remove');
+            Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
+            Route::post('/remove', [CartController::class, 'clearAllCart'])->name('cart.clearAllCart');
         });
     });
 });

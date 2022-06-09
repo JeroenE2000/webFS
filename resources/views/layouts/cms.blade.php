@@ -13,12 +13,15 @@
   <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.5.2/css/OverlayScrollbars.min.css" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
   <link rel="stylesheet" href="{{ asset('css/dashboard.css') }}">
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
@@ -95,13 +98,13 @@
           @endif
           <li class="nav-item">
             <a href="{{url('cms/dishes')}}" class="nav-link">
-              <i class="nav-icon far fa fa-croissant"></i>
+              <i class="nav-icon far ion-icecream"></i>
               <p>Gerechten</p>
             </a>
           </li>
           <li class="nav-item">
             <a href="{{url('cms/discounts')}}" class="nav-link">
-              <i class="nav-icon far fa fa-badge-dollar"></i>
+              <i class="nav-icon far fa fa-tag"></i>
               <p>Kortingen</p>
             </a>
           </li>
