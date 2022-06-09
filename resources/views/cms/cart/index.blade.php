@@ -52,7 +52,7 @@
                                                     <td>{{$item->name}}</td>
                                                     <td>{{$item->price}}</td>
                                                     <td></td>
-                                                    <form action="{{ route('cart.update') }}" method="POST">
+                                                    <form action="{{ route('cartdd.update') }}" method="post">
                                                         @csrf
                                                         <td>
                                                             <input name="amount" value="{{$item->quantity}}" type="number">
@@ -60,6 +60,13 @@
                                                         </td>
                                                         <td>
                                                             <button type="submit" class="btn btn-success md-4">update</button>
+                                                        </td>
+                                                    </form>
+                                                    <form action="{{ route('cart.remove') }}" method="POST">
+                                                        @csrf
+                                                        <input type="hidden" value="{{ $item->id }}" name="id">
+                                                        <td>
+                                                            <button type="submit" class="btn btn-success md-4">remove</button>
                                                         </td>
                                                     </form>
                                                 </tr>

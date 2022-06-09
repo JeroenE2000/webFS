@@ -81,10 +81,9 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
             Route::resource('/discounts', SalesController::class)->except(['show']);
             Route::get('/cart', [CartController::class, 'cartList'])->name('cart.index');
             Route::post('/cart', [CartController::class, 'addToCart'])->name('cart.store');
-            Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cart.update');
+            Route::post('/update-cart', [CartController::class, 'updateCart'])->name('cartdd.update');
             Route::post('/remove', [CartController::class, 'removeCart'])->name('cart.remove');
-            Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clear');
-            Route::post('/remove', [CartController::class, 'clearAllCart'])->name('cart.clearAllCart');
+            Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clearAllCart');
         });
     });
 });

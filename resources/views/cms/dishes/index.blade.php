@@ -88,7 +88,7 @@
                   <h3 class="card-title">Dishes</h3>
                </div>
                <div class="card-body">
-                <a href="{{ route('cart.index') }}" class="flex items-centerbtn btn-success">Winkelmandje</a>
+                <a href="{{ route('cart.index') }}" class="btn btn-success md-4">Winkelmandje</a>
 
                 <div class="table-responsive">
                     <table id="table_id" class="table table-bordered table-hover">
