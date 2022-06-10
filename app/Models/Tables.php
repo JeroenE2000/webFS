@@ -13,6 +13,7 @@ class Tables extends Model
 
     public $fillable = [
         'guest_amount',
+        'table_number',
     ];
 
     public function Orders()

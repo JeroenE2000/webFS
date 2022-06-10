@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Tables;
 use App\Models\Categories;
 use Illuminate\Http\Request;
 use App\Models\HistoryOfDiscounts;
@@ -19,7 +20,8 @@ class OrderController extends Controller
         if(session('table_number')) {
             return redirect(route('tableCategories'));
         }
-        return view('order.index');
+        $tables = Tables::all();
+        return view('order.index' , compact('tables'));
     }
 
     public function getCategories()
@@ -38,6 +40,10 @@ class OrderController extends Controller
         $request->validate([
             'number' => 'required|min:0'
         ]);
+        $table = Tables::where('table_number', $request->number)->first();
+        if(!$table) {
+            return redirect(route('order'))->withErrors(['error' => 'Tafelnummer bestaat niet']);
+        }
 
         Session::put('table_number', $request->input('number'));
         return redirect(route('tableCategories'));

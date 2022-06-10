@@ -88,7 +88,7 @@
                                         <select class="form-control" name="table_id" id="table_id">
                                             <option value=""></option>
                                             @foreach($tables as $t)
-                                                <option value="{{$t->id}}">{{$t->id}}</option>
+                                                <option value="{{$t->table_number}}">{{$t->id}}</option>
                                             @endforeach
                                         </select>
                                         <br>
