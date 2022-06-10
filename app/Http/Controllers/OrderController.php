@@ -56,10 +56,8 @@ class OrderController extends Controller
             ->get();
         $tempsales = [];
         foreach($sales as $sale) {
-            foreach($dishes as $dish) {
-                if($dish->id == $sale->dishes_id) {
-                    $tempsales[$dish->id] = $dish->price * (1 - ($sale->discount/100));
-                }
+            foreach($sale->dishes()->get() as $dish) {
+                $tempsales[$dish->id] = $dish->price * (1 - ($sale->discount/100));
             }
         }
         $sales = $tempsales;

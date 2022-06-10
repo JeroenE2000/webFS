@@ -103,7 +103,15 @@
                                         @csrf
                                         <input type="hidden" value="{{ $d->id }}" name="id">
                                         <input type="hidden" value="{{ $d->name }}" name="name">
-                                        <input type="hidden" value="{{ $d->price }}" name="price">
+                                        @if($d->Discounts()->count() > 0)
+                                            @foreach($d->Discounts as $sale)
+                                                @if(now() >= $sale->start_time && now() <= $sale->end_time)
+                                                    <input type="hidden" value="{{number_format($d->price*(1-($sale->discount/100)), 2, '.', ',')}}" name="price">
+                                                @endif
+                                            @endforeach
+                                        @else
+                                            <input type="hidden" value="{{ $d->price }}" name="price">
+                                        @endif
                                         <input type="hidden" value=""  name="description">
                                         <input type="hidden" value="1" name="quantity">
                                         <button class="btn btn-success md-4">Add to cart</button>
@@ -199,7 +207,4 @@
         $('allergens').selectpicker();
     });
 </script>
-<script src="{{ asset('js/cashDesk.js') }}"></script>
-
-
 @endsection

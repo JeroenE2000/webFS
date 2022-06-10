@@ -43,19 +43,16 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($sales as $sale)
-                                @foreach($dishes as $d)
-                                    @if($sale->dishes_id == $d->id)
+                            @foreach($dishes as $dish)
+                                @foreach($dish->Discounts()->get() as $sale)
                                     <tr>
-                                        <td>{{$d->dishnumber}}</td>
-                                        <td>{{$d->name}}</td>
+                                        <td>{{$dish->dishnumber}}</td>
+                                        <td>{{$dish->name}}</td>
                                         <td>{{$sale->discount}}</td>
                                         <td>{{$sale->start_time}}</td>
                                         <td>{{$sale->end_time}}</td>
-                                    @endif
-                                @endforeach
                                         <td>
-                                            <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('discounts.edit',$sale) }}">Bijwerken</a>
+                                            <a id="update{{$sale->id}}" class="btn btn-success" href="{{ route('discounts.edit',$sale) }}">Bijwerken</a>
                                         </td>
                                         <td>
                                             <form action="{{ route('discounts.destroy', $sale->id) }}" method="POST">
@@ -65,6 +62,7 @@
                                             </form>
                                         </td>
                                     </tr>
+                                @endforeach
                             @endforeach
                         </tbody>
                         <tfoot>
@@ -94,10 +92,10 @@
                     <form action="{{ route('discounts.store') }}" method="POST">
                         @csrf
                         <div class="form-group">
-                            <label for="dishes_id">Gerecht</label>
-                            <select class="form-control" name="dishes_id" id="dishes_id">
-                                @foreach($dishes as $d)
-                                <option value="{{$d->id}}">{{$d->name}}</option>
+                            <label for="dishes_id">Gerechten</label>
+                            <select class="form-control selectpicker" multiple data-live-search="true"  multiple ="multiple" name="dishes[]" id="dishes" title="Geen gerecht geselecteerd">
+                                @foreach($dishes as $dish)
+                                    <option value="{{$dish->id}}" @if(old('dishes') && in_array($dish->id, old('dishes')))selected="selected"@endif>{!! $dish->name !!}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -123,6 +121,10 @@
         </div>
     </div>
 </section>
-
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('dishes').selectpicker();
+    });
+</script>
 
 @endsection

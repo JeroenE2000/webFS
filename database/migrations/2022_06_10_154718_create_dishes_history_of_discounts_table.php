@@ -13,12 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('history_of_discounts', function (Blueprint $table) {
-            $table->id();
-            $table->dateTime("start_time");
-            $table->dateTime("end_time");
-            $table->integer("discount");
-            $table->timestamps();
+        Schema::create('dishes_history_of_discounts', function (Blueprint $table) {
+            $table->foreignId('history_of_discounts_id')->references('id')->on('history_of_discounts')->cascadeOnDelete();
+            $table->foreignId('dishes_id')->references('id')->on('dishes')->cascadeOnDelete();
         });
     }
 
@@ -29,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('history_of_discounts');
+        Schema::dropIfExists('dishes_history_of_discounts');
     }
 };

@@ -6,6 +6,7 @@ use App\Models\Dishes;
 use App\Models\Allergies;
 use App\Models\Categories;
 use Illuminate\Http\Request;
+use App\Models\HistoryOfDiscounts;
 
 class DishController extends Controller
 {
@@ -21,16 +22,18 @@ class DishController extends Controller
                 ->orWhere('dishnumber', 'like', '%' . $request->dishsearch . '%')
                 ->with('Allergies')
                 ->with('Categories')
+                ->with('Discounts')
                 ->get();
         } else {
-            $dishes = Dishes::with('Allergies' , 'Categories')->get();
+            $dishes = Dishes::with('Allergies' , 'Categories' , 'Discounts')->get();
         }
         if(isset($request->category)) {
             $dishes = $dishes->where('categories_id', $request->category);
         }
         $categories = Categories::all();
         $allergies = Allergies::all();
-        return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies]);
+        $discounts = HistoryOfDiscounts::all();
+        return view('cms.dishes.index' , ['dishes' => $dishes , 'categories' => $categories , 'allergies' => $allergies , 'discounts' => $discounts]);
     }
 
     /**
