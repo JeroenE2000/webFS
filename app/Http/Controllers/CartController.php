@@ -78,7 +78,7 @@ class CartController extends Controller
             $newOrder->dishes()->attach($cartItem->id,['amount' => $cartItem->quantity, 'price' => $cartItem->price, 'notation' => $cartItem->description]);
         }
         \Cart::clear();
-        return redirect(route('dishes.index'))->with('alert-success', 'De bestelling is geplaatst');
+        return redirect(route('dishes.index'))->with('success', 'De bestelling is geplaatst');
     }
 
     /**
