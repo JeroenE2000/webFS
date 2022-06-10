@@ -12,11 +12,11 @@
                     <div v-else class="fst-italic" v-html="dish['description']"></div>
                     <div v-if="sales[dish['id']]">
                         <div class="mt-2">
-                            <del>€{{formatPrice(dish['price'])}}</del>
+                            <del>&euro; {{formatPrice(dish['price'])}}</del>
                         </div>
-                        <span>€{{formatPrice(sales[dish['id']])}}</span>
+                        <span>&euro; {{formatPrice(sales[dish['id']])}}</span>
                     </div>
-                    <div v-else>€{{ formatPrice(dish['price'])}}</div>
+                    <div v-else>&euro; {{ formatPrice(dish['price'])}}</div>
                     <button :id = "'submit' + dish['id']" type="submit" class="btn btn-primary center">Toevoegen</button>
                 </div>
             </div>

@@ -40,49 +40,7 @@
     </div>
    <div class="container-fluid">
       <div class="row">
-          @if(auth()->user()->role_id == 2)
-            <div class="col-12 col-sm-12">
-                <div class="card">
-                    <div class="card-header">
-                       <h3 class="card-title">Bestelling maken</h3>
-                    </div>
-                    <form id ="formOrdering" action="" method="post">
-                        <div class="card-body">
-                            <div class="table-responsive">
-                                <div class="hidden-scrollbar">
-                                    <table id="orderList" class="table table-bordered table-hover">
-                                        <thead>
-                                            <tr>
-                                                <th>id</th>
-                                                <th>naam</th>
-                                                <th>prijs</th>
-                                                <th>opmerking</th>
-                                                <th>aantal</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                                <div class="float-left">
-                                    Totaal
-                                </div>
-                                <div class="float-right">
-                                    <span id="totalPRICE">€ 0,00</span>
-                                </div>
-                            </div>
-                            <div class="card-footer align-self-end ">
-                                <button type="submit" id = "submitBtn" class="btn btn-success">Afrekenen</button>
-                                <button type="submit" id = "btnRemove" class="btn btn-danger">Verwijderen</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                </form>
-            </div>
-            <div class="col-12 col-sm-12">
-        @endif
+        <div class="col-12 col-sm-12">
             <div class="card">
                <div class="card-header">
                   <h3 class="card-title">Dishes</h3>
@@ -146,9 +104,9 @@
                                         <input type="hidden" value="{{ $d->id }}" name="id">
                                         <input type="hidden" value="{{ $d->name }}" name="name">
                                         <input type="hidden" value="{{ $d->price }}" name="price">
-                                        <input type="hidden" value=""  name="opmerking">
+                                        <input type="hidden" value=""  name="description">
                                         <input type="hidden" value="1" name="quantity">
-                                        <button type="submit" class="btn btn-success md-4">Add to cart</button>
+                                        <button class="btn btn-success md-4">Add to cart</button>
                                     </form>
                                 </td>
                             </div>

@@ -4,6 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="content-container text-center">
+            @if($sales->isEmpty())
+            <h1>Er zijn helaas geen aanbiedingen</h1>
+            @else
             @foreach($sales as $sale)
                 @foreach($dishes as $d)
                     @if($sale->dishes_id == $d->id)
@@ -20,6 +23,7 @@
                     @endif
                 @endforeach
             @endforeach
+            @endif
         </div>
     </div>
 </div>

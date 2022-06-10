@@ -33,7 +33,7 @@ class Dishes extends Model
 
     public function Orders()
     {
-        return $this->belongsToMany(Orders::class , 'orders_dishes' , 'dish_id' , 'order_id');
+        return $this->belongsToMany(Orders::class , 'orders_dishes' , 'dish_id' , 'order_nummer');
     }
 
     public function Discounts()

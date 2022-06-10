@@ -20,16 +20,14 @@
         </ul>
     </div>
 @endif
-<span class="success" style="color:green; margin-top:10px; margin-bottom: 10px;"></span>
     <section class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12 col-sm-12">
                     <div class="card">
                         <div class="card-header">
-                        <h3 class="card-title">Bestelling maken</h3>
+                        <h3 class="card-title">Winkelmandje</h3>
                         </div>
-                        <form id ="formOrdering" action="" method="post">
                             <div class="card-body">
                                 <div class="table-responsive">
                                     <div class="hidden-scrollbar">
@@ -51,11 +49,13 @@
                                                     <td>{{$item->id}}</td>
                                                     <td>{{$item->name}}</td>
                                                     <td>{{$item->price}}</td>
-                                                    <td></td>
-                                                    <form action="{{ route('cartdd.update') }}" method="post">
+                                                    <form action="{{ route('cart.update') }}" method="POST">
                                                         @csrf
                                                         <td>
-                                                            <input name="amount" value="{{$item->quantity}}" type="number">
+                                                            <input name="description" value="{{$item->description}}" type="text">
+                                                        </td>
+                                                        <td>
+                                                            <input name="quantity" value="{{$item->quantity}}" type="number">
                                                             <input type="hidden" name="id" value="{{ $item->id}}" >
                                                         </td>
                                                         <td>
@@ -78,15 +78,28 @@
                                         Totaal
                                     </div>
                                     <div class="float-right">
-                                        <span id="totalPRICE">€ 0,00</span>
+                                        <span id="totalPRICE">${{ Cart::getTotal() }}</span>
                                     </div>
                                 </div>
                                 <div class="card-footer align-self-end ">
-                                    <button type="submit" id = "submitBtn" class="btn btn-success">Afrekenen</button>
-                                    <button type="submit" id = "btnRemove" class="btn btn-danger">Verwijderen</button>
+                                    <form action="{{ route('cart.checkout') }}" method="POST">
+                                        @csrf
+                                        <label for="tabelnumber">Tafelnummer</label>
+                                        <select class="form-control" name="table_id" id="table_id">
+                                            <option value=""></option>
+                                            @foreach($tables as $t)
+                                                <option value="{{$t->id}}">{{$t->id}}</option>
+                                            @endforeach
+                                        </select>
+                                        <br>
+                                        <button type="submit" id = "submitBtn" class="btn btn-success">Afrekenen</button>
+                                    </form>
+                                    <form action="{{ route('cart.clearAllCart') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" id="btnRemove" class="btn btn-danger">Verwijderen</button>
+                                    </form>
                                 </div>
                             </div>
-                        </form>
                     </div>
                 </div>
             </div>

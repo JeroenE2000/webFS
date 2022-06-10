@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Darryldecode\Cart\Cart;
+use App\Models\Orders;
+use App\Models\Tables;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 class CartController extends Controller
 {
@@ -16,7 +16,8 @@ class CartController extends Controller
     public function cartList()
     {
         $cartItems = \Cart::getContent();
-        return view('cms.cart.index', compact('cartItems'));
+        $tables = Tables::all();
+        return view('cms.cart.index', compact('cartItems' , 'tables'));
     }
     /**
      * Store a newly created resource in storage.
@@ -31,7 +32,7 @@ class CartController extends Controller
             'name' => $request->name,
             'price' => $request->price,
             'quantity' => $request->quantity,
-            'opmerking' => $request->opmerking,
+            'description' => $request->description,
         ]);
         session()->flash('success', 'Product is Added to Cart Successfully !');
         return redirect()->route('dishes.index');
@@ -44,21 +45,40 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function updateCart(Request $request)
+    public function update(Request $request)
     {
         \Cart::update(
             $request->id,
             [
                 'quantity' => [
                     'relative' => false,
-                    'value' => $request->quantity
+                    'value' => $request->quantity,
                 ],
+                'description' => $request->description,
             ]
         );
 
         session()->flash('success', 'Item Cart is Updated Successfully !');
 
         return redirect()->route('cart.index');
+    }
+
+    public function checkout(Request $request)
+    {
+        $cartItems = \Cart::getContent();
+        $order = new Orders();
+        if ($request->input('table_id') != "") {
+            $order->table_id = $request->input('table_id');
+        }
+        $order->have_payed = 0;
+        $order->order_time = date('Y-m-d H:i:s');
+        $order->save();
+        $newOrder = Orders::latest()->first();
+        foreach($cartItems as $cartItem) {
+            $newOrder->dishes()->attach($cartItem->id,['amount' => $cartItem->quantity, 'price' => $cartItem->price, 'notation' => $cartItem->description]);
+        }
+        \Cart::clear();
+        return redirect(route('dishes.index'))->with('alert-success', 'De bestelling is geplaatst');
     }
 
     /**
