@@ -13,14 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+        Schema::create('allergies_dishes', function (Blueprint $table) {
+            $table->foreignId('allergies_id')->references('id')->on('allergies')->cascadeOnDelete();
+            $table->foreignId('dishes_id')->references('id')->on('dishes')->cascadeOnDelete();
         });
     }
 
@@ -31,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('allergies_dishes');
     }
 };
