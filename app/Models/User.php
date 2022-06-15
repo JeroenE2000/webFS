@@ -51,8 +51,17 @@ class User extends Authenticatable
         return false;
     }
 
+    public function RolesRelation() {
+        return $this->belongsTo(Roles::class, 'role_id');
+    }
+
     public function roles()
     {
         return Roles::find($this->id);
+    }
+
+    public function tables()
+    {
+        return $this->belongsToMany(Tables::class, 'table_users', 'users_id', 'table_id');
     }
 }

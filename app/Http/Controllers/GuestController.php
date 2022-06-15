@@ -29,10 +29,8 @@ class GuestController extends Controller
             ->get();
         $tempsales = [];
         foreach($sales as $sale) {
-            foreach($dishes as $dish) {
-                if($dish->id == $sale->dishes_id) {
-                    $tempsales[$dish->id] = $dish->price * (1 - ($sale->discount/100));
-                }
+            foreach($sale->dishes()->get() as $dish) {
+                $tempsales[$dish->id] = $dish->price * (1 - ($sale->discount/100));
             }
         }
         $sales = $tempsales;
@@ -45,6 +43,13 @@ class GuestController extends Controller
         $sales = HistoryOfDiscounts::where('start_time', '<=', date('Y-m-d H:i:s'))
             ->where('end_time', '>=', date('Y-m-d H:i:s'))
             ->get();
+        $tempsales = [];
+        foreach($sales as $sale) {
+            foreach($sale->dishes()->get() as $dish) {
+                $tempsales[$dish->id] = $dish->price * (1 - ($sale->discount/100));
+            }
+        }
+        $sales = $tempsales;
         $data = ['dishes'=>$dishes,'categories'=>$categories, 'sales' => $sales];
         $pdf = PDF::loadView('guest.menu-pdf', $data);
         return $pdf->stream();

@@ -12,7 +12,6 @@ class HistoryOfDiscounts extends Model
     protected $primaryKey = 'id';
 
     public $fillable = [
-        'dishes_id',
         'start_time',
         'end_time',
         'discount',
@@ -20,7 +19,7 @@ class HistoryOfDiscounts extends Model
 
     public function Dishes()
     {
-        return $this->belongsTo(Dishes::class);
+        return $this->belongsToMany(Dishes::class , 'dishes_history_of_discounts', 'history_of_discounts_id', 'dishes_id');
     }
 
 }

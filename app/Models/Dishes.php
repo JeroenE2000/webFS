@@ -33,11 +33,11 @@ class Dishes extends Model
 
     public function Orders()
     {
-        return $this->belongsToMany(Orders::class , 'orders_dishes' , 'dish_id' , 'order_id');
+        return $this->belongsToMany(Orders::class , 'orders_dishes' , 'dish_id' , 'order_nummer');
     }
 
     public function Discounts()
     {
-        return $this->belongsToMany(HistoryOfDiscounts::class);
+        return $this->belongsToMany(HistoryOfDiscounts::class , 'dishes_history_of_discounts' , 'dishes_id' , 'history_of_discounts_id');
     }
 }

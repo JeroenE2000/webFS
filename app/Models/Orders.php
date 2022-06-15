@@ -13,14 +13,13 @@ class Orders extends Model
 
     public $fillable = [
         'table_id',
-        'count',
-        'price',
-        'status',
+        'have_payed',
+        'order_time',
     ];
 
-    public function Dishes()
+    public function dishes()
     {
-        return $this->belongsToMany(Dishes::class , 'orders_dishes' , 'order_id' , 'dish_id');
+        return $this->belongsToMany(Dishes::class , 'orders_dishes' , 'order_nummer' , 'dish_id')->withPivot('amount' , 'price' , 'notation');
     }
 
     public function Tables()

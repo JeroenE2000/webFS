@@ -15,10 +15,9 @@ return new class extends Migration
     {
         Schema::create('history_of_discounts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dishes_id')->references('id')->on('dishes')->cascadeOnDelete();
             $table->dateTime("start_time");
             $table->dateTime("end_time");
-            $table->decimal("discount", 2, 2);
+            $table->integer("discount");
             $table->timestamps();
         });
     }

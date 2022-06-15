@@ -23,6 +23,7 @@
                             € {{number_format($dish->price, 2, '.', ',')}}
                         </div>
                     </div>
+                    <br>
                     @endforeach
             @endforeach
         </div>
@@ -31,18 +32,19 @@
 <div>
     <h2>Aanbiedingen</h2>
     @foreach($dishes as $dish)
-        @foreach($sales as $sale)
-            @if($sale->dishes_id === $dish->id)
+        @foreach($dish->Discounts()->get() as $sale)
                 {{$dish->dishnumber}}{{$dish->dish_addition}}
                 {!!$dish->name!!}
                 <div>
-                    <del style="color: red">€ {{number_format($dish->price, 2, '.', ',')}}</del>
+                   <del style="color: red">€ {{number_format($dish->price, 2, '.', ',')}}</del>
+                    <span style="color:green">€ {{number_format($dish->price*(1-($sale->discount/100)), 2, '.', ',')}}</span>
+                    <span>{{$sale->discount}}%</span>
+                    <span>Korting van  {{$sale->start_time}} en tot {{$sale->end_time}}</span>
+                    <br/>
                 </div>
-                <span style="color:green">€ {{number_format($dish->price*(1-($sale->discount/100)), 2, '.', ',')}}</span>
-                <br/>
-            @endif
+
         @endforeach
-    @endforeach
+@endforeach
 </div>
 </body>
 </html>

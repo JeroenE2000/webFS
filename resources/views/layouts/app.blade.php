@@ -19,6 +19,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 </head>
 <body>
     <div class="main-table container-fluid h-100">
@@ -96,6 +97,7 @@
                                 <span class="navbar-toggler-icon"></span>
                             </button>
                             <div class="collapse navbar-collapse  justify-content-center" id="navbarNav">
+                                @if(!Auth::check())
                                 <ul class="navbar-nav">
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
                                         <a href="{{url('/')}}" class="nav-link text-white">Home</a>
@@ -110,9 +112,22 @@
                                         <a href="{{url('/contact')}}" class="nav-link text-white">Contact</a>
                                     </li>
                                     <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                        <a href="" class="nav-link text-white">Aanbiedingen</a>
+                                        <a href="{{url('/sale')}}" class="nav-link text-white">Aanbiedingen</a>
                                     </li>
                                 </ul>
+                                @endif
+                                @auth
+                                    @if(auth()->user()->role_id == 4)
+                                    <ul class="navbar-nav">
+                                        <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
+                                            <a href="{{url('/order')}}" class="nav-link text-white">Bestellen</a>
+                                        </li>
+                                        <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
+                                            <a href="{{url('/check_out_page')}}" class="nav-link text-white">Uitchecken & uitloggen</a>
+                                        </li>
+                                    </ul>
+                                    @endif
+                                @endauth
                             </div>
                         </nav>
                     </div>
@@ -123,7 +138,7 @@
                     </div>
 
                     <div class="text-center pt-3">
-                        <a href="">Naar Contact</a>
+                        <a href="{{url('/contact')}}">Naar Contact</a>
                     </div>
                     </div>
                 </div>
