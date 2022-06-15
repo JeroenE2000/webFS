@@ -122,7 +122,12 @@ class DishController extends Controller
             'spicness_scale' => 'required|integer|between:0,3',
             'dish_addition' => 'max:3'
         ]);
-
+        $getAllDishes = Dishes::all();
+        foreach($getAllDishes as $dish){
+            if($dish->dishnumber == $request->input('dish_number')){
+                return redirect()->route('dishes.edit', $id)->with('warning', 'Dishnumber already exists');
+            }
+        }
         $dish = Dishes::find($id);
         $dish->name = $request->input('name');
         $dish->price = $request->input('price');
