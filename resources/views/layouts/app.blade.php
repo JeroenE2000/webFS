@@ -123,7 +123,7 @@
                                             <a href="{{url('/order')}}" class="nav-link text-white">Bestellen</a>
                                         </li>
                                         <li class="nav-item text-center bg-primary bg-gradient mx-1 rounded">
-                                            <a href="{{url('/signout')}}" class="nav-link text-white">Uitloggen</a>
+                                            <a href="{{url('/check_out_page')}}" class="nav-link text-white">Uitchecken & uitloggen</a>
                                         </li>
                                     </ul>
                                     @endif
@@ -138,7 +138,7 @@
                     </div>
 
                     <div class="text-center pt-3">
-                        <a href="">Naar Contact</a>
+                        <a href="{{url('/contact')}}">Naar Contact</a>
                     </div>
                     </div>
                 </div>

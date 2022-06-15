@@ -12,8 +12,10 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\GuestController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\SalesController;
+use App\Http\Controllers\TableController;
 use App\Http\Controllers\AllergiesController;
 use App\Http\Controllers\CategorieController;
+use App\Http\Controllers\OrderSalesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,14 +40,22 @@ Route::get('/news',function(){
 
 Route::get('/categories', [GuestController::class, 'index'])->name('categories');
 Route::get('/download-menu-as-pdf',[GuestController::class, 'pdfConverter'])->name('downloadMenu');
-Route::get('/{category_id}/table/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
+Route::get('/{category_id}/get-courses', [GuestController::class, 'getDishes'])->name('get-dishes');
+Route::get('/shopping_cart', [GuestController::class, 'shoppingCart'])->name('shopping_cart');
+Route::post('/order', [GuestController::class, 'order'])->name('postOrder');
 Route::get('/sale', [SalesController::class, 'getSales'])->name('sale');
+Route::get('/order/{order_id}/qr-code', [GuestController::class, 'QrCodeMaker'])->name('getQrCode');
+
 
 Route::middleware('checkRole:user')->group(function(){
     Route::get('/order', [OrderController::class , 'index'])->name('order');
     Route::post('/store_table_number', [OrderController::class ,'storeTableNumber'])->name('postTableNumber');
+    Route::get('/order/shopping_cart', [OrderController::class, 'shoppingCart'])->name('getShoppingCart');
     Route::get('/order/categories', [OrderController::class, 'getCategories'])->name('tableCategories');
-    Route::get('/{category_id}/get-courses',[OrderController::class, 'getDishes'])->name('getTableCourses');
+    Route::get('/order/{category_id}/get-courses',[OrderController::class, 'getDishes'])->name('getTableCourses');
+    Route::post('/order/store', [OrderController::class, 'saveOrder'])->name('orderCreate');
+    Route::get('/check_out_page', [OrderController::class, 'checkOutPage'])->name('checkOutPage');
+    Route::post('/check_out', [OrderController::class, 'checkOutAndLogOut'])->name('checkOut');
 });
 
 
@@ -73,6 +83,7 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
             Route::resource('/categories', CategorieController::class)->except(['show']);
             Route::resource('/users', UserController::class)->except(['show']);
             Route::resource('/allergies', AllergiesController::class)->except(['show']);
+            Route::resource('/tables', TableController::class)->except(['show']);
         });
         Route::middleware('checkRole:kassamedewerker,serveerster,admin')->group(function(){
             Route::resource('/dishes', DishController::class);
@@ -85,6 +96,7 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
             Route::post('/remove', [CartController::class, 'removeCart'])->name('cart.remove');
             Route::post('/clear', [CartController::class, 'clearAllCart'])->name('cart.clearAllCart');
             Route::post('/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+            Route::resource('/orders', OrderSalesController::class)->except(['create ', 'store' , 'destroy' , 'edit' , 'update']);
         });
     });
 });

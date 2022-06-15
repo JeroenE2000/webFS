@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Orders;
 use App\Models\Tables;
 use Illuminate\Http\Request;
@@ -17,7 +18,8 @@ class CartController extends Controller
     {
         $cartItems = \Cart::getContent();
         $tables = Tables::all();
-        return view('cms.cart.index', compact('cartItems' , 'tables'));
+        $user = User::where('role_id', 4)->get();
+        return view('cms.cart.index', compact('cartItems' , 'tables' , 'user'));
     }
     /**
      * Store a newly created resource in storage.
@@ -77,8 +79,20 @@ class CartController extends Controller
         foreach($cartItems as $cartItem) {
             $newOrder->dishes()->attach($cartItem->id,['amount' => $cartItem->quantity, 'price' => $cartItem->price, 'notation' => $cartItem->description]);
         }
+        if ($request->input('table_id') != "" && $request->input('user_id') != "") {
+            $table = Tables::where('id', $request->input('table_id'))->first();
+            $ordertime = date('Y-m-d H:i:s');
+            $table->users()->attach($request->input('user_id'), [
+                'start_time' => $ordertime,
+                'end_time' => $ordertime
+            ]);
+        }
+
+        if($request->input('table_id') != "" && $request->input('user_id') == "") {
+            return redirect(route('cart.index'))->with('warning', 'Er is geen gebruiker gekozen voor deze tafel');
+        }
         \Cart::clear();
-        return redirect(route('dishes.index'))->with('success', 'De bestelling is geplaatst');
+        return redirect(route('orders.index'))->with('success', 'De bestelling is geplaatst');
     }
 
     /**

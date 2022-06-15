@@ -46,102 +46,114 @@
                   <h3 class="card-title">Dishes</h3>
                </div>
                <div class="card-body">
-                <a href="{{ route('cart.index') }}" class="btn btn-success md-4">Winkelmandje</a>
-
-                <div class="table-responsive">
-                    <table id="table_id" class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th>Dishnumber</th>
-                                <th>Dish_addition</th>
-                                <th>Category</th>
-                                <th>Allergieen</th>
-                                <th>Naam</th>
-                                <th>Prijs</th>
-                                <th>Beschrijving</th>
-                                <th>Spice scale</th>
-                                @if(auth()->user()->role_id == 1)
-                                    <th>Bijwerken</th>
-                                    <th>Verwijderen</th>
-                                @endif
-                                <th>Toevoegen</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach($dishes as $d)
-                            <tr>
-                                <td>{{$d->dishnumber}}</td>
-                                <td>{{$d->dish_addition}}</td>
-                                @foreach($categories as $c)
-                                    @if($c->id == $d->categories_id)
-                                        <td>{{$c->name}}</td>
+                @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                    <a href="{{route('cart.index')}}" title="Ga naar winkelwagen" class="btn btn-primary btn-lg shopping-cart">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-cart"
+                        viewBox="0 0 16 16">
+                    <path
+                        d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+                    </svg>
+                    Winkelmandje {{Cart::getTotalQuantity()}}</a>
+                @endif
+                    <div class="table-responsive">
+                        <table id="table_id" class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Dishnumber</th>
+                                    <th>Dish_addition</th>
+                                    <th>Category</th>
+                                    <th>Allergieen</th>
+                                    <th>Naam</th>
+                                    <th>Prijs</th>
+                                    <th>Beschrijving</th>
+                                    <th>Spice scale</th>
+                                    @if(auth()->user()->role_id == 1)
+                                        <th>Bijwerken</th>
+                                        <th>Verwijderen</th>
                                     @endif
-                                @endforeach
-                                <td>
-                                @foreach($d->Allergies as $a )
-                                {{$a->name}}
-                                @endforeach
-                                </td>
-                                <td>{{$d->name}}</td>
-                                <td>€ {{$d->price}}</td>
-                                <td>{{$d->description}}</td>
-                                <td>{{$d->spicness_scale}}</td>
-                                @if(auth()->user()->role_id == 1)
+                                    @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <th>Toevoegen</th>
+                                    @endif
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach($dishes as $d)
+                                <tr>
+                                    <td>{{$d->dishnumber}}</td>
+                                    <td>{{$d->dish_addition}}</td>
+                                    @foreach($categories as $c)
+                                        @if($c->id == $d->categories_id)
+                                            <td>{{$c->name}}</td>
+                                        @endif
+                                    @endforeach
                                     <td>
-                                        <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('dishes.edit',$d) }}">Bijwerken</a>
+                                        @foreach($d->Allergies as $a )
+                                            {{$a->name}}
+                                        @endforeach
                                     </td>
+                                    <td>{{$d->name}}</td>
+                                    <td>&euro; {{$d->price}}</td>
+                                    <td>{{$d->description}}</td>
+                                    <td>{{$d->spicness_scale}}</td>
+                                    @if(auth()->user()->role_id == 1)
+                                        <td>
+                                            <a id="update{{$d->id}}" class="btn btn-success" href="{{ route('dishes.edit',$d) }}">Bijwerken</a>
+                                        </td>
+                                        <td>
+                                            <form action="{{ route('dishes.destroy', $d->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" id="delete{{$d->id}}" class="btn btn-danger">Verwijderen</button>
+                                            </form>
+                                        </td>
+                                    @endif
                                     <td>
-                                        <form action="{{ route('dishes.destroy', $d->id) }}" method="POST">
+                                    @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <form action="{{ route('cart.store') }}" method="POST">
                                             @csrf
-                                            @method('DELETE')
-                                            <button type="submit" id="delete{{$d->id}}" class="btn btn-danger">Verwijderen</button>
+                                            <input type="hidden" value="{{ $d->id }}" name="id">
+                                            <input type="hidden" value="{{ $d->name }}" name="name">
+                                            @if($d->Discounts()->count() > 0)
+                                                @foreach($d->Discounts as $sale)
+                                                    @if(date('Y-m-d H:i:s') >= $sale->start_time && date('Y-m-d H:i:s') <= $sale->end_time)
+                                                        <input type="hidden" value="{{($d->price*(1-($sale->discount/100)))}}" name="price">
+                                                    @endif
+                                                @endforeach
+                                            @else
+                                                <input type="hidden" value="{{ $d->price }}" name="price">
+                                            @endif
+                                                <input type="hidden" value=""  name="description">
+                                                <input type="hidden" value="1" name="quantity">
+                                                <button class="btn btn-success md-4">Add to cart</button>
                                         </form>
                                     </td>
-                                @endif
-                                <td>
-                                    <form action="{{ route('cart.store') }}" method="POST">
-                                        @csrf
-                                        <input type="hidden" value="{{ $d->id }}" name="id">
-                                        <input type="hidden" value="{{ $d->name }}" name="name">
-                                        @if($d->Discounts()->count() > 0)
-                                            @foreach($d->Discounts as $sale)
-                                                @if(now() >= $sale->start_time && now() <= $sale->end_time)
-                                                    <input type="hidden" value="{{number_format($d->price*(1-($sale->discount/100)), 2, '.', ',')}}" name="price">
-                                                @endif
-                                            @endforeach
-                                        @else
-                                            <input type="hidden" value="{{ $d->price }}" name="price">
-                                        @endif
-                                        <input type="hidden" value=""  name="description">
-                                        <input type="hidden" value="1" name="quantity">
-                                        <button class="btn btn-success md-4">Add to cart</button>
-                                    </form>
-                                </td>
-                            </div>
-                            </tr>
-                            @endforeach
-                        </tbody>
-                        <tfoot>
-                            <tr>
-                                <th>Dishnumber</th>
-                                <th>Dish_addition</th>
-                                <th>Category</th>
-                                <th>Allergieen</th>
-                                <th>Naam</th>
-                                <th>Prijs</th>
-                                <th>Beschrijving</th>
-                                <th>Spice scale</th>
-                                @if(auth()->user()->role_id == 1)
-                                    <th>Bijwerken</th>
-                                    <th>Verwijderen</th>
-                                @endif
-                                <th>Toevoegen</th>
-                            </tr>
-                        </tfoot>
-                    </table>
+                                    @endif
+                                </tr>
+                                @endforeach
+                            </tbody>
+                            <tfoot>
+                                <tr>
+                                    <th>Dishnumber</th>
+                                    <th>Dish_addition</th>
+                                    <th>Category</th>
+                                    <th>Allergieen</th>
+                                    <th>Naam</th>
+                                    <th>Prijs</th>
+                                    <th>Beschrijving</th>
+                                    <th>Spice scale</th>
+                                    @if(auth()->user()->role_id == 1)
+                                        <th>Bijwerken</th>
+                                        <th>Verwijderen</th>
+                                    @endif
+                                    @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
+                                        <th>Toevoegen</th>
+                                    @endif
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </div>
                 </div>
             </div>
-        </div>
         </div>
     </div>
     @if(auth()->user()->role_id == 1)

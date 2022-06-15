@@ -59,4 +59,9 @@ class User extends Authenticatable
     {
         return Roles::find($this->id);
     }
+
+    public function tables()
+    {
+        return $this->belongsToMany(Tables::class, 'table_users', 'users_id', 'table_id');
+    }
 }

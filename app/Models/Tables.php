@@ -23,7 +23,7 @@ class Tables extends Model
 
     public function users()
     {
-        return $this->belongsToMany(Users::class);
+        return $this->belongsToMany(User::class , 'table_users' , 'table_id' , 'users_id')->withPivot('start_time', 'end_time');
     }
 
 }

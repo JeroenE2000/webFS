@@ -19,7 +19,7 @@ class Orders extends Model
 
     public function dishes()
     {
-        return $this->belongsToMany(Dishes::class , 'orders_dishes' , 'order_nummer' , 'dish_id');
+        return $this->belongsToMany(Dishes::class , 'orders_dishes' , 'order_nummer' , 'dish_id')->withPivot('amount' , 'price' , 'notation');
     }
 
     public function Tables()

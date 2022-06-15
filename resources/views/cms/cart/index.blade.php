@@ -88,10 +88,17 @@
                                         <select class="form-control" name="table_id" id="table_id">
                                             <option value=""></option>
                                             @foreach($tables as $t)
-                                                <option value="{{$t->table_number}}">{{$t->id}}</option>
+                                                <option value="{{$t->id}}">{{$t->table_number}}</option>
                                             @endforeach
                                         </select>
                                         <br>
+                                        <label for="user_id">Gebruiker</label>
+                                        <select class="form-control" name="user_id" id="user_id">
+                                            <option value=""></option>
+                                            @foreach($user as $u)
+                                                <option value="{{$u->id}}">{{$u->name}}</option>
+                                            @endforeach
+                                        </select>
                                         <button type="submit" id = "submitBtn" class="btn btn-success">Afrekenen</button>
                                     </form>
                                     <form action="{{ route('cart.clearAllCart') }}" method="POST">
