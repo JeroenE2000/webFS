@@ -219,6 +219,31 @@ a {
     text-decoration: none;
 }
 
+.marquee {
+    height:25px;
+    width: 420px;
+    overflow: hidden;
+    position: relative;
+}
+
+.marquee div {
+    display:block;
+    width: 200%;
+    height: 30px;
+    position: absolute;
+    overflow: hidden;
+    animation: marquee 10s linear infinite;
+}
+
+.marquee span {
+    width: 100%
+}
+
+@keyframes marquee {
+    0% { left: 100%; }
+    100% { left: -100%; }
+}
+
 .marque:hover{
     color:yellow;
 }
@@ -339,6 +364,10 @@ a {
         color:yellow;
         font-weight:bold;
         text-decoration: none;
+    }
+    .marquee {
+        height:25px;
+        width: 200px;
     }
     /* For mobile phones: */
     [class*="col-"] {
