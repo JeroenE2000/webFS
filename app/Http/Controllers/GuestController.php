@@ -126,6 +126,8 @@ class GuestController extends Controller
                 $dish = $dishes[$i];
                 $qr_code_string .= $dish->dishnumber ? $dish->dishnumber : '';
                 $qr_code_string .= $dish->dish_addition ? $dish->dish_addition : '';
+                $qr_code_string .= " ";
+                $qr_code_string .= $dish->name ? $dish->name : '';
                 if($i != count($dishes)-1) {
                     $qr_code_string .= ', ';
                 }
