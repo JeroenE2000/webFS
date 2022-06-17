@@ -121,11 +121,13 @@ class GuestController extends Controller
             $order = Orders::find($order_id);
             $dishes = $order->dishes()->get();
             $qr_code_string = 'Order id: '.$order->id.'||';
-            $qr_code_string = 'Gerechtnummers: ';
+            $qr_code_string .= 'Gerechtnummers: ';
             for($i = 0; $i < count($dishes); $i++) {
                 $dish = $dishes[$i];
                 $qr_code_string .= $dish->dishnumber ? $dish->dishnumber : '';
                 $qr_code_string .= $dish->dish_addition ? $dish->dish_addition : '';
+                $qr_code_string .= " ";
+                $qr_code_string .= $dish->name ? $dish->name : '';
                 if($i != count($dishes)-1) {
                     $qr_code_string .= ', ';
                 }

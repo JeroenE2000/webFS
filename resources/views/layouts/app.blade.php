@@ -31,12 +31,14 @@
                 </a>
                 <img class="align-middle h-img hide520px" src="{{url('images/dragon-small-flipped.png')}}" alt="Golden Dragon">
             </div>
-            <div class="col ">
-                <a href="{{url('/sale')}}" class="marque">
-                    <marquee behavior="scroll" direction="left">
-                        Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
-                    </marquee>
-                </a>
+            <div class="col marquee w-50">
+                <div>
+                    <a href="{{url('/sale')}}" class="marque">
+                        <span>
+                            Welkom bij De Gouden Draak. Klik op deze tekst om de aanbiedingen van deze week te zien!
+                        </span>
+                    </a>
+                </div>
             </div>
             <div class="dragon-cell col hide1030px">
                 <img class="align-middle h-img" src="{{url('images/dragon-small.png')}}" alt="Golden Dragon">
