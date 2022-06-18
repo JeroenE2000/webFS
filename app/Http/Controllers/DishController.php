@@ -123,9 +123,10 @@ class DishController extends Controller
             'dish_addition' => 'max:3'
         ]);
         $getAllDishes = Dishes::all();
-        foreach($getAllDishes as $dish){
-            if($dish->dishnumber == $request->input('dish_number')){
-                return redirect()->route('dishes.edit', $id)->with('warning', 'Dishnumber already exists');
+        $dish = Dishes::find($id);
+        foreach($getAllDishes as $dishfind){
+            if($dishfind->dishnumber == $request->input('dish_number') && $dishfind->dishnumber != $dish->dishnumber){
+                return redirect()->route('dishes.edit' , $id)->with('warning', 'Dishnumber already exists');
             }
         }
         $dish = Dishes::find($id);
