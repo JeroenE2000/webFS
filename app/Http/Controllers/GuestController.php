@@ -42,7 +42,7 @@ class GuestController extends Controller
     }
 
     public function pdfConverter() {
-        $dishes = Dishes::all();
+        $dishes = Dishes::with('Allergies')->get();
         $categories = Categories::all();
         $sales = HistoryOfDiscounts::where('start_time', '<=', date('Y-m-d H:i:s'))
             ->where('end_time', '>=', date('Y-m-d H:i:s'))

@@ -16,11 +16,18 @@
                     <div>
                         {{$dish->dishnumber}}{{$dish->dish_addition}}
                         {{$dish->name}}
+                        <p>Spiciness: {{$dish->spicness_scale}}</p>
+                        <p>Allergieen: </p>
                         <div>
-                            {!!$dish->description!!}
+                            @foreach($dish->Allergies as $allergie)
+                                {{$allergie->name}}
+                            @endforeach
                         </div>
                         <div>
-                            € {{number_format($dish->price, 2, '.', ',')}}
+                            Beschrijving : {!!$dish->description!!}
+                        </div>
+                        <div>
+                            Prijs: € {{number_format($dish->price, 2, '.', ',')}}
                         </div>
                     </div>
                     <br>
