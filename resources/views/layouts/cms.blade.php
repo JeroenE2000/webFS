@@ -101,6 +101,12 @@
               <p>Tafels</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{url('cms/orders-betweenDates')}}" class="nav-link">
+                <i class="nav-icon far fa fa-tag"></i>
+                <p>Bestellingsoverzicht</p>
+            </a>
+          </li>
           @endif
           @if(auth()->user()->role_id == 1 || auth()->user()->role_id == 2)
             <li class="nav-item">

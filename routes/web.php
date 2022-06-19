@@ -84,6 +84,8 @@ Route::middleware('checkRole:admin,kassamedewerker,serveerster')->group(function
             Route::resource('/users', UserController::class)->except(['show']);
             Route::resource('/allergies', AllergiesController::class)->except(['show']);
             Route::resource('/tables', TableController::class)->except(['show']);
+            Route::get('/orders-betweenDates', [OrderSalesController::class , 'toOrdersBetweenDate'])->name('orders.betweenDates');
+            Route::post('/orders-betweenDates', [OrderSalesController::class , 'ordersBetweenDate'])->name('orders.betweenDates.post');
         });
         Route::middleware('checkRole:kassamedewerker,serveerster,admin')->group(function(){
             Route::resource('/dishes', DishController::class);

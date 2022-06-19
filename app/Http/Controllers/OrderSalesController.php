@@ -24,4 +24,23 @@ class OrderSalesController extends Controller
         $singleOrder = Orders::find($id);
         return view('cms.order_sales.show', ['order' => $order , 'singleOrder' => $singleOrder]);
     }
+
+    public function toOrdersBetweenDate() {
+        return view('cms.order_sales.orders', ['orders' => null]);
+    }
+
+    public function ordersBetweenDate(Request $request) {
+
+        $orders = Orders::where('order_time', '>=', $request->start_time)
+            ->where('order_time', '<=', $request->end_time)->get();
+        $totalprice = 0;
+        foreach($orders as $order) {
+            foreach($order->dishes as $dish) {
+                $totalprice += ($dish->pivot->amount * $dish->price);
+            }
+        }
+
+        return view('cms.order_sales.orders', ['orders' => $orders , 'totalprice' => $totalprice]);
+
+    }
 }
