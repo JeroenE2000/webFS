@@ -47,8 +47,9 @@
                                 <th>Price</th>
                             </tr>
                         </thead>
+                        @if($orders != null)
+
                         <tbody>
-                            @if($orders != null)
                                 @foreach ($orders as $order)
                                     @foreach($order->dishes as $dish)
                                         <tr>
@@ -61,11 +62,14 @@
                                 <tr>
                                     <td>Totaal</td>
                                     <td></td>
-                                    <td>&euro; {{ $totalprice }}</td>
+
                                 </tr>
-                            @endif
                         </tbody>
                     </table>
+                        <p>Totale prijs: &euro; {{ $totalprice }}<p>
+                        <p>Btw: &euro; {{ number_format((($totalprice / 121) * 21 ),2)}}<p>
+                        <p>Excusief BTW: &euro; {{ number_format((($totalprice / 121) * 100),2 )}}<p>
+                    @endif
                 </div>
             </div>
         </div>
